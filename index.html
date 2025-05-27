@@ -336,7 +336,7 @@
                         <div class="metric-card rounded-3xl p-6 text-center">
                             <div class="w-12 h-12 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0-2.08.402-2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
                                 </svg>
                             </div>
                             <div class="text-white/60 text-sm font-medium mb-1">Total Invested</div>
@@ -394,18 +394,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- <div class="glass-card rounded-3xl p-6">
-                        <h3 class="text-white font-bold text-lg mb-4 flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                            </svg>
-                            Growth Projection
-                        </h3>
-                        <div class="chart-container">
-                            <canvas id="growthChart" height="300"></canvas>
-                        </div>
-                    </div> -->
                 </div>
 
                 <div id="errorMessage" class="glass-card-dark rounded-2xl p-4 text-red-300 hidden animate-scale-in">
@@ -607,7 +595,8 @@
             }
         });
 
-        elements.calculateBtn.addEventListener('click', performCalculationAndUpdateUI);
+        // Removed the explicit click listener for calculateBtn
+        // elements.calculateBtn.addEventListener('click', performCalculationAndUpdateUI);
 
         elements.resetBtn.addEventListener('click', function() {
             // Reset form
