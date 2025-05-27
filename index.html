@@ -3,213 +3,648 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIP Calculator</title>
+    <title>SIP Calculator - Modern Finance</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        // Tailwind CSS configuration
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'scale-in': 'scaleIn 0.4s ease-out',
+                        'gradient': 'gradient 15s ease infinite',
+                        'spin-slow': 'spin 3s linear infinite',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* Custom font */
+        /* Global body styling with gradient background and animation */
         body {
             font-family: 'Inter', sans-serif;
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
         }
-        /* Custom styles for input icons */
-        .input-with-icon {
+
+        /* Keyframe animations for background gradient, floating elements, glow, slide-up, fade-in, scale-in */
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(99, 102, 241, 0.5); }
+            to { box-shadow: 0 0 30px rgba(99, 102, 241, 0.8), 0 0 40px rgba(99, 102, 241, 0.3); }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Glassmorphism card styles */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-card-dark {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Modern input field styles */
+        .modern-input {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid transparent;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modern-input:focus {
+            background: rgba(255, 255, 255, 1);
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            outline: none;
+        }
+
+        /* Modern button styles with hover effects */
+        .modern-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
+            overflow: hidden;
         }
-        .input-with-icon input {
-            padding-left: 2.5rem; /* Space for the icon */
-        }
-        .input-with-icon .icon {
+
+        .modern-button::before {
+            content: '';
             position: absolute;
-            left: 0.75rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6B7280; /* Gray-500 */
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .modern-button:hover::before {
+            left: 100%;
+        }
+
+        .modern-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Neomorphism effect (not explicitly used but defined) */
+        .neo-morphism {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            box-shadow: 
+                20px 20px 60px rgba(0, 0, 0, 0.1),
+                -20px -20px 60px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Metric card styles with hover effects */
+        .metric-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Floating elements for background visual effect */
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) { top: 10%; left: 10%; width: 80px; height: 80px; background: #ff6b6b; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 70%; right: 10%; width: 120px; height: 120px; background: #4ecdc4; animation-delay: -2s; }
+        .floating-element:nth-child(3) { bottom: 20%; left: 20%; width: 60px; height: 60px; background: #45b7d1; animation-delay: -4s; }
+        .floating-element:nth-child(4) { top: 30%; right: 30%; width: 100px; height: 100px; background: #f9ca24; animation-delay: -6s; }
+
+        /* Gradient text styling */
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Chart container styling (removed as chart is removed) */
+        /* .chart-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+        } */
+
+        /* Custom scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Range slider styling */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-track {
+            background: rgba(255, 255, 255, 0.2);
+            height: 12px;
+            border-radius: 6px;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="range"]::-moz-range-track {
+            background: rgba(255, 255, 255, 0.2);
+            height: 12px;
+            border-radius: 6px;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-blue-400 to-indigo-600 min-h-screen flex items-center justify-center p-4">
-    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md transform transition-all duration-300 hover:scale-[1.01]">
-        <h1 class="text-3xl font-extrabold text-center text-gray-800 mb-6">
-            <span class="text-blue-600">SIP</span> Calculator
-        </h1>
-        <p class="text-center text-gray-600 mb-8">Plan your investments and see your potential returns!</p>
+<body class="min-h-screen font-inter overflow-x-hidden">
+    <div class="fixed inset-0 pointer-events-none">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
 
-        <div class="space-y-5">
-            <div class="input-with-icon">
-                <label for="monthlyAmount" class="block text-gray-700 text-sm font-medium mb-1">Monthly Investment Amount (₹)</label>
-                <div class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-                <input type="number" id="monthlyAmount" value="5000" min="1"
-                       class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 shadow-sm"
-                       placeholder="e.g., 5000">
+    <div class="relative z-10 min-h-screen p-4 md:p-8">
+        <header class="text-center mb-12 animate-fade-in">
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full glass-card mb-6 animate-glow">
+                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                </svg>
             </div>
-            <div class="input-with-icon">
-                <label for="annualReturn" class="block text-gray-700 text-sm font-medium mb-1">Expected Annual Return Rate (%)</label>
-                <div class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
-                    </svg>
+            <h1 class="text-5xl md:text-7xl font-black text-white mb-4 tracking-tight">
+                SIP<span class="gradient-text">Calculator</span>
+            </h1>
+            <p class="text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+                Build wealth systematically with our advanced SIP calculator. Visualize your financial future.
+            </p>
+        </header>
+
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-5 space-y-6">
+                <div class="glass-card rounded-3xl p-8 animate-slide-up">
+                    <div class="flex items-center mb-8">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-bold text-white">Investment Setup</h2>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-white/90 font-semibold mb-3 text-sm uppercase tracking-wide">Monthly Investment</label>
+                            <div class="relative">
+                                <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 font-bold">₹</span>
+                                <input type="number" id="monthlyAmount" value="5000" min="1" 
+                                       class="w-full pl-8 pr-4 py-4 rounded-2xl modern-input font-bold text-xl"
+                                       placeholder="5,000">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-white/90 font-semibold mb-3 text-sm uppercase tracking-wide">Expected Return</label>
+                            <div class="relative">
+                                <input type="number" id="annualReturn" value="12" min="0" step="0.1"
+                                       class="w-full pr-12 pl-4 py-4 rounded-2xl modern-input font-bold text-xl"
+                                       placeholder="12">
+                                <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-600 font-bold">%</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-white/90 font-semibold mb-3 text-sm uppercase tracking-wide">Investment Period</label>
+                            <div class="flex items-center space-x-4">
+                                <input type="range" id="yearSlider" min="1" max="30" value="10" 
+                                       class="flex-1 h-3 bg-white/20 rounded-full appearance-none cursor-pointer">
+                                <div class="flex items-center">
+                                    <input type="number" id="investmentYears" value="10" min="1" max="30"
+                                           class="w-16 p-2 rounded-lg modern-input text-center font-bold">
+                                    <span class="ml-2 text-white/60 text-sm">years</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between text-white/40 text-xs mt-2">
+                                <span>1 year</span>
+                                <span>30 years</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-white/90 font-semibold mb-3 text-sm uppercase tracking-wide">Annual Increase in SIP (%)</label>
+                            <div class="relative">
+                                <input type="number" id="annualIncrease" value="0" min="0" step="0.1"
+                                       class="w-full pr-12 pl-4 py-4 rounded-2xl modern-input font-bold text-xl"
+                                       placeholder="0">
+                                <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-600 font-bold">%</span>
+                            </div>
+                        </div>
+
+                        <div class="flex space-x-4 pt-6">
+                            <button id="calculateBtn" class="flex-1 modern-button py-4 px-6 rounded-2xl font-bold text-white text-lg relative overflow-hidden">
+                                Calculate Returns
+                            </button>
+                            <button id="resetBtn" class="px-6 py-4 rounded-2xl glass-card-dark text-white font-semibold hover:bg-white/10 transition-all duration-300">
+                                Reset
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <input type="number" id="annualReturn" value="12" min="0" step="0.1"
-                       class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 shadow-sm"
-                       placeholder="e.g., 12">
-            </div>
-            <div class="input-with-icon">
-                <label for="investmentYears" class="block text-gray-700 text-sm font-medium mb-1">Investment Duration (Years)</label>
-                <div class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-                <input type="number" id="investmentYears" value="10" min="1"
-                       class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 shadow-sm"
-                       placeholder="e.g., 10">
             </div>
 
-            <div class="flex space-x-4">
-                <button id="calculateBtn"
-                        class="flex-1 bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 shadow-md transform hover:scale-105">
-                    Calculate SIP
-                </button>
-                <button id="resetBtn"
-                        class="flex-1 bg-gray-300 text-gray-800 p-3 rounded-lg font-semibold hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition duration-200 shadow-md transform hover:scale-105">
-                    Reset
-                </button>
+            <div class="lg:col-span-7 space-y-6">
+                <div id="results" class="hidden animate-fade-in">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="metric-card rounded-3xl p-6 text-center">
+                            <div class="w-12 h-12 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0-2.08.402-2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                </svg>
+                            </div>
+                            <div class="text-white/60 text-sm font-medium mb-1">Total Invested</div>
+                            <div id="totalInvested" class="text-2xl font-black text-white">₹0</div>
+                        </div>
+
+                        <div class="metric-card rounded-3xl p-6 text-center">
+                            <div class="w-12 h-12 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                </svg>
+                            </div>
+                            <div class="text-white/60 text-sm font-medium mb-1">Final Amount</div>
+                            <div id="totalReturns" class="text-2xl font-black text-white">₹0</div>
+                        </div>
+
+                        <div class="metric-card rounded-3xl p-6 text-center">
+                            <div class="w-12 h-12 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                            </div>
+                            <div class="text-white/60 text-sm font-medium mb-1">Total Profit</div>
+                            <div id="totalProfit" class="text-2xl font-black text-white">₹0</div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-3xl p-6 mb-6">
+                        <h3 class="text-white font-bold text-lg mb-4 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                            Investment Summary
+                        </h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-white/70">Monthly SIP</span>
+                                <span id="monthlySip" class="text-white font-bold">₹5,000</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-white/70">Duration</span>
+                                <span id="investPeriod" class="text-white font-bold">10 years</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-white/70">Return Rate</span>
+                                <span id="returnRate" class="text-white font-bold">12%</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-white/70">Wealth Multiplier</span>
+                                <span id="wealthMultiplier" class="text-emerald-400 font-bold text-lg">0x</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-white/70">Annual SIP Increase</span>
+                                <span id="annualIncreaseDisplay" class="text-white font-bold">0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="glass-card rounded-3xl p-6">
+                        <h3 class="text-white font-bold text-lg mb-4 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                            Growth Projection
+                        </h3>
+                        <div class="chart-container">
+                            <canvas id="growthChart" height="300"></canvas>
+                        </div>
+                    </div> -->
+                </div>
+
+                <div id="errorMessage" class="glass-card-dark rounded-2xl p-4 text-red-300 hidden animate-scale-in">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.732 15.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                        </svg>
+                        <span>Please enter valid positive numbers for all fields.</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div id="results" class="mt-10 space-y-4 p-6 bg-blue-50 rounded-xl shadow-lg border border-blue-200 hidden">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Your Investment Summary</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center">
-                    <span class="text-sm text-gray-600">Total Invested:</span>
-                    <span id="totalInvested" class="font-extrabold text-2xl text-green-700 mt-1">₹0</span>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center">
-                    <span class="text-sm text-gray-600">Maturity Amount:</span>
-                    <span id="totalReturns" class="font-extrabold text-2xl text-blue-700 mt-1">₹0</span>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center col-span-full">
-                    <span class="text-sm text-gray-600">Total Profit:</span>
-                    <span id="totalProfit" class="font-extrabold text-2xl text-purple-700 mt-1">₹0</span>
+        <div class="max-w-7xl mx-auto mt-16">
+            <div class="glass-card rounded-3xl p-8">
+                <h2 class="text-3xl font-bold text-white text-center mb-8">💡 Smart Investment Tips</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center group">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">Start Early</h3>
+                        <p class="text-white/70 text-sm leading-relaxed">Time is your greatest asset in investing. Start your SIP journey today and let compound interest work its magic.</p>
+                    </div>
+                    <div class="text-center group">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">Stay Consistent</h3>
+                        <p class="text-white/70 text-sm leading-relaxed">Regular investments through SIP help average out market volatility and build disciplined financial habits.</p>
+                    </div>
+                    <div class="text-center group">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">Diversify Smart</h3>
+                        <p class="text-white/70 text-sm leading-relaxed">Spread your investments across different fund categories to balance risk and optimize your portfolio returns.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div id="errorMessage" class="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg hidden" role="alert">
-            Please enter valid positive numbers for all fields.
         </div>
     </div>
 
     <script>
-        // Get references to HTML elements
-        const monthlyAmountInput = document.getElementById('monthlyAmount');
-        const annualReturnInput = document.getElementById('annualReturn');
-        const investmentYearsInput = document.getElementById('investmentYears');
-        const calculateBtn = document.getElementById('calculateBtn');
-        const resetBtn = document.getElementById('resetBtn'); // Get reset button
-        const resultsDiv = document.getElementById('results');
-        const totalInvestedSpan = document.getElementById('totalInvested');
-        const totalReturnsSpan = document.getElementById('totalReturns');
-        const totalProfitSpan = document.getElementById('totalProfit');
-        const errorMessageDiv = document.getElementById('errorMessage');
+        // Global variables for Chart.js (no longer needed, but keeping for reference if re-added)
+        let growthChart = null;
 
-        /**
-         * Formats a number as Indian Rupee currency, using Lakhs and Crores for large numbers.
-         * @param {number} amount - The amount to format.
-         * @returns {string} The formatted currency string.
-         */
-        function formatIndianCurrency(amount) {
-            if (amount >= 10000000) { // 1 Crore
+        // DOM Elements
+        const elements = {
+            monthlyAmount: document.getElementById('monthlyAmount'),
+            annualReturn: document.getElementById('annualReturn'),
+            yearSlider: document.getElementById('yearSlider'),
+            investmentYears: document.getElementById('investmentYears'),
+            annualIncrease: document.getElementById('annualIncrease'), // New element for annual increase
+            calculateBtn: document.getElementById('calculateBtn'),
+            resetBtn: document.getElementById('resetBtn'),
+            results: document.getElementById('results'),
+            errorMessage: document.getElementById('errorMessage'),
+            totalInvested: document.getElementById('totalInvested'),
+            totalReturns: document.getElementById('totalReturns'),
+            totalProfit: document.getElementById('totalProfit'),
+            monthlySip: document.getElementById('monthlySip'),
+            investPeriod: document.getElementById('investPeriod'),
+            returnRate: document.getElementById('returnRate'),
+            wealthMultiplier: document.getElementById('wealthMultiplier'),
+            annualIncreaseDisplay: document.getElementById('annualIncreaseDisplay') // For displaying step-up rate in summary
+        };
+
+        // Utility functions
+        const formatCurrency = (amount) => {
+            if (amount >= 10000000) {
                 return '₹' + (amount / 10000000).toFixed(2) + ' Cr';
-            } else if (amount >= 100000) { // 1 Lakh
-                return '₹' + (amount / 100000).toFixed(2) + ' Lakh';
-            } else {
-                return new Intl.NumberFormat('en-IN', {
-                    style: 'currency',
-                    currency: 'INR',
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0,
-                }).format(amount);
+            } else if (amount >= 100000) {
+                return '₹' + (amount / 100000).toFixed(2) + ' L';
             }
-        }
+            return '₹' + amount.toLocaleString('en-IN');
+        };
 
-        /**
-         * Calculates the SIP maturity amount, total invested, and total profit.
-         */
-        function calculateSIP() {
-            // Get input values and convert them to numbers
-            const monthlyAmount = parseFloat(monthlyAmountInput.value);
-            const annualReturn = parseFloat(annualReturnInput.value);
-            const investmentYears = parseFloat(investmentYearsInput.value);
+        const showError = (message) => {
+            elements.errorMessage.querySelector('span').textContent = message;
+            elements.errorMessage.classList.remove('hidden');
+            elements.results.classList.add('hidden');
+        };
 
-            // Validate inputs
-            if (isNaN(monthlyAmount) || isNaN(annualReturn) || isNaN(investmentYears) ||
-                monthlyAmount <= 0 || annualReturn < 0 || investmentYears <= 0) {
-                errorMessageDiv.classList.remove('hidden'); // Show error message
-                resultsDiv.classList.add('hidden'); // Hide results
-                return; // Exit function if inputs are invalid
-            } else {
-                errorMessageDiv.classList.add('hidden'); // Hide error message if inputs are valid
+        const hideError = () => {
+            elements.errorMessage.classList.add('hidden');
+        };
+
+        // SIP Calculation function with annual step-up
+        const calculateSIP = (monthlyAmount, annualRate, years, annualIncreaseRate) => {
+            let accumulatedValue = 0;
+            let accumulatedInvested = 0;
+            let currentMonthlySIPForYear = monthlyAmount; // Temporary variable for current year's SIP
+
+            const monthlyRate = annualRate / 12 / 100;
+            const annualReturnFactor = 1 + (annualRate / 100);
+            const annualIncreaseFactor = 1 + (annualIncreaseRate / 100);
+
+            for (let year = 1; year <= years; year++) {
+                // Calculate future value of current year's monthly contributions
+                // Formula for Future Value of an Ordinary Annuity (monthly payments)
+                const currentYearSIPValue = currentMonthlySIPForYear * (((Math.pow(1 + monthlyRate, 12)) - 1) / monthlyRate) * (1 + monthlyRate);
+                
+                // Add current year's SIP value to accumulated value and compound for the year
+                accumulatedValue = (accumulatedValue * annualReturnFactor) + currentYearSIPValue;
+                accumulatedInvested += (currentMonthlySIPForYear * 12); // Track total invested
+                
+                // Apply step-up for the next year's SIP, if it's not the last year
+                if (year < years) {
+                    currentMonthlySIPForYear *= annualIncreaseFactor;
+                }
+            }
+            return { futureValue: accumulatedValue, totalInvested: accumulatedInvested };
+        };
+
+        // Generate chart data (function is now empty as chart is removed)
+        const generateChartData = (monthlyAmount, annualRate, years, annualIncreaseRate) => {
+            // This function is no longer needed but kept as a placeholder if chart functionality is re-added
+            // It will return empty data as there's no chart to populate.
+            return { labels: [], investedData: [], returnsData: [] };
+        };
+
+        // Create/Update chart (function is now empty as chart is removed)
+        const updateChart = (chartData) => {
+            // No chart to update
+            if (growthChart) {
+                growthChart.destroy();
+                growthChart = null;
+            }
+        };
+
+        // Function to perform calculation and update UI
+        const performCalculationAndUpdateUI = () => {
+            const monthlyAmount = parseFloat(elements.monthlyAmount.value);
+            const annualReturn = parseFloat(elements.annualReturn.value);
+            const years = parseInt(elements.investmentYears.value);
+            const annualIncrease = parseFloat(elements.annualIncrease.value); // Get annual increase
+
+            // Validation
+            if (!monthlyAmount || monthlyAmount <= 0) {
+                showError('Please enter a valid monthly investment amount.');
+                return;
             }
 
-            // Convert annual return rate to monthly interest rate
-            const monthlyRate = annualReturn / 100 / 12;
-            // Calculate total number of months
-            const totalMonths = investmentYears * 12;
-
-            let futureValue = 0;
-
-            // SIP calculation formula: FV = P * (((1 + r)^n - 1) / r) * (1 + r)
-            // This formula calculates the future value of a series of equal payments (annuity due)
-            if (monthlyRate === 0) {
-                // If interest rate is 0, future value is simply monthly amount * total months
-                futureValue = monthlyAmount * totalMonths;
-            } else {
-                futureValue = monthlyAmount * (Math.pow(1 + monthlyRate, totalMonths) - 1) / monthlyRate * (1 + monthlyRate);
+            if (isNaN(annualReturn) || annualReturn < 0) {
+                showError('Please enter a valid expected return rate.');
+                return;
             }
 
-            // Calculate total amount invested
-            const totalInvested = monthlyAmount * totalMonths;
-            // Calculate total profit
+            if (!years || years <= 0 || years > 30) {
+                showError('Please enter a valid investment period (1-30 years).');
+                return;
+            }
+
+            if (isNaN(annualIncrease) || annualIncrease < 0) {
+                showError('Please enter a valid annual increase percentage (0 or more).');
+                return;
+            }
+
+            hideError();
+
+            // Calculations using the updated calculateSIP function
+            const { futureValue, totalInvested } = calculateSIP(monthlyAmount, annualReturn, years, annualIncrease);
             const totalProfit = futureValue - totalInvested;
+            const wealthMultiplier = (totalInvested > 0) ? (futureValue / totalInvested).toFixed(1) : 0;
 
-            // Display results, formatted using the new Indian currency format
-            totalInvestedSpan.textContent = formatIndianCurrency(totalInvested);
-            totalReturnsSpan.textContent = formatIndianCurrency(futureValue);
-            totalProfitSpan.textContent = formatIndianCurrency(totalProfit);
+            // Update display
+            elements.totalInvested.textContent = formatCurrency(totalInvested);
+            elements.totalReturns.textContent = formatCurrency(futureValue);
+            elements.totalProfit.textContent = formatCurrency(totalProfit);
+            elements.monthlySip.textContent = formatCurrency(monthlyAmount);
+            elements.investPeriod.textContent = `${years} year${years > 1 ? 's' : ''}`;
+            elements.returnRate.textContent = `${annualReturn}%`;
+            elements.wealthMultiplier.textContent = `${wealthMultiplier}x`;
+            elements.annualIncreaseDisplay.textContent = `${annualIncrease}%`; // Display annual increase
 
-            // Show the results section
-            resultsDiv.classList.remove('hidden');
-        }
+            // No chart to generate or update
+            // const chartData = generateChartData(monthlyAmount, annualReturn, years, annualIncrease);
+            // updateChart(chartData);
 
-        /**
-         * Resets all input fields and hides the results and error messages.
-         */
-        function resetCalculator() {
-            monthlyAmountInput.value = '5000';
-            annualReturnInput.value = '12';
-            investmentYearsInput.value = '10';
-            resultsDiv.classList.add('hidden');
-            errorMessageDiv.classList.add('hidden');
-            // Optionally, clear the displayed values if they were not hidden
-            totalInvestedSpan.textContent = '₹0';
-            totalReturnsSpan.textContent = '₹0';
-            totalProfitSpan.textContent = '₹0';
-        }
+            // Show results
+            elements.results.classList.remove('hidden');
+        };
 
-        // Add event listeners
-        calculateBtn.addEventListener('click', calculateSIP);
-        resetBtn.addEventListener('click', resetCalculator); // Add event listener for reset button
+        // Event Listeners
+        elements.yearSlider.addEventListener('input', function() {
+            elements.investmentYears.value = this.value;
+        });
 
-        // Initial calculation when the page loads with default values
-        window.onload = calculateSIP;
+        elements.investmentYears.addEventListener('input', function() {
+            if (this.value >= 1 && this.value <= 30) {
+                elements.yearSlider.value = this.value;
+            }
+        });
+
+        elements.calculateBtn.addEventListener('click', performCalculationAndUpdateUI);
+
+        elements.resetBtn.addEventListener('click', function() {
+            // Reset form
+            elements.monthlyAmount.value = '5000';
+            elements.annualReturn.value = '12';
+            elements.yearSlider.value = '10';
+            elements.investmentYears.value = '10';
+            elements.annualIncrease.value = '0'; // Reset annual increase
+            
+            // Hide results
+            elements.results.classList.add('hidden');
+            hideError();
+            
+            // No chart to destroy
+            // if (growthChart) {
+            //     growthChart.destroy();
+            //     growthChart = null;
+            // }
+            // Re-run initial calculation after reset
+            performCalculationAndUpdateUI();
+        });
+
+        // Auto-calculate on input change
+        [elements.monthlyAmount, elements.annualReturn, elements.investmentYears, elements.annualIncrease].forEach(element => {
+            element.addEventListener('input', function() {
+                // Only trigger calculation if all fields have values that could be valid numbers
+                if (elements.monthlyAmount.value !== '' && elements.annualReturn.value !== '' && 
+                    elements.investmentYears.value !== '' && elements.annualIncrease.value !== '') {
+                    performCalculationAndUpdateUI();
+                }
+            });
+        });
+
+        // Initialize with default calculation on window load
+        window.addEventListener('load', function() {
+            performCalculationAndUpdateUI();
+        });
     </script>
 </body>
 </html>
-
-
-
-
