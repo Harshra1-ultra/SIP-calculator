@@ -8,7 +8,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script>
-        // Tailwind CSS configuration
         tailwind.config = {
             theme: {
                 extend: {
@@ -22,14 +21,12 @@
                         'fade-in': 'fadeIn 0.6s ease-out',
                         'scale-in': 'scaleIn 0.4s ease-out',
                         'gradient': 'gradient 15s ease infinite',
-                        'spin-slow': 'spin 3s linear infinite',
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Global body styling with gradient background and animation */
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe);
@@ -37,7 +34,6 @@
             animation: gradient 15s ease infinite;
         }
 
-        /* Keyframe animations for background gradient, floating elements, glow, slide-up, fade-in, scale-in */
         @keyframes gradient {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -69,7 +65,6 @@
             to { transform: scale(1); opacity: 1; }
         }
 
-        /* Glassmorphism card styles */
         .glass-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(20px);
@@ -84,7 +79,6 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
-        /* Modern input field styles */
         .modern-input {
             background: rgba(255, 255, 255, 0.9);
             border: 2px solid transparent;
@@ -98,7 +92,6 @@
             outline: none;
         }
 
-        /* Modern button styles with hover effects */
         .modern-button {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -126,7 +119,6 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
-        /* Neomorphism effect (not explicitly used but defined) */
         .neo-morphism {
             background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
             box-shadow: 
@@ -134,7 +126,6 @@
                 -20px -20px 60px rgba(255, 255, 255, 0.1);
         }
 
-        /* Metric card styles with hover effects */
         .metric-card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
             backdrop-filter: blur(10px);
@@ -147,7 +138,6 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
-        /* Floating elements for background visual effect */
         .floating-element {
             position: absolute;
             border-radius: 50%;
@@ -160,7 +150,6 @@
         .floating-element:nth-child(3) { bottom: 20%; left: 20%; width: 60px; height: 60px; background: #45b7d1; animation-delay: -4s; }
         .floating-element:nth-child(4) { top: 30%; right: 30%; width: 100px; height: 100px; background: #f9ca24; animation-delay: -6s; }
 
-        /* Gradient text styling */
         .gradient-text {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
@@ -168,7 +157,6 @@
             background-clip: text;
         }
 
-        /* Chart container styling */
         .chart-container {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
@@ -176,7 +164,7 @@
             padding: 20px;
         }
 
-        /* Custom scrollbar styles */
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -195,73 +183,55 @@
             background: rgba(255, 255, 255, 0.5);
         }
 
-        /* Range slider styling */
-        input[type="range"] {
+        /* Enhanced Range slider styling - Dark theme */
+        .range-slider {
             -webkit-appearance: none;
             appearance: none;
-            background: transparent;
+            height: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            outline: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
             cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
         }
 
-        input[type="range"]::-webkit-slider-track {
-            background: rgba(255, 255, 255, 0.2);
-            height: 12px;
-            border-radius: 6px;
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
         }
 
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
+        .range-slider::-moz-range-track {
+            height: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .range-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            height: 24px;
-            width: 24px;
             border-radius: 50%;
-            border: 2px solid white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        input[type="range"]::-moz-range-track {
-            background: rgba(255, 255, 255, 0.2);
-            height: 12px;
-            border-radius: 6px;
-        }
-
-        input[type="range"]::-moz-range-thumb {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            height: 24px;
-            width: 24px;
-            border-radius: 50%;
-            border: 2px solid white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Modal styles */
-        .modal {
-            background-color: rgba(0, 0, 0, 0.7);
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        .modal-content {
-            animation: slideUp 0.3s ease-out;
-        }
-
-        /* Loading spinner styles */
-        .loader {
-            border: 4px solid #f3f3f3; /* Light grey */
-            border-top: 4px solid #3498db; /* Blue */
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
 <body class="min-h-screen font-inter overflow-x-hidden">
+    <!-- Floating Elements -->
     <div class="fixed inset-0 pointer-events-none">
         <div class="floating-element"></div>
         <div class="floating-element"></div>
@@ -269,7 +239,9 @@
         <div class="floating-element"></div>
     </div>
 
+    <!-- Main Container -->
     <div class="relative z-10 min-h-screen p-4 md:p-8">
+        <!-- Header Section -->
         <header class="text-center mb-12 animate-fade-in">
             <div class="inline-flex items-center justify-center w-20 h-20 rounded-full glass-card mb-6 animate-glow">
                 <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -282,10 +254,11 @@
             <p class="text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
                 Build wealth systematically with our advanced SIP calculator. Choose from premium mutual funds and visualize your financial future.
             </p>
-            <div id="userIdDisplay" class="text-white/60 text-sm mt-4">User ID: Loading...</div>
         </header>
 
+        <!-- Main Content Grid -->
         <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-8">
+            <!-- Input Section -->
             <div class="lg:col-span-5 space-y-6">
                 <div class="glass-card rounded-3xl p-8 animate-slide-up">
                     <div class="flex items-center mb-8">
@@ -298,6 +271,7 @@
                     </div>
 
                     <div class="space-y-6">
+                        <!-- Mutual Fund Selection -->
                         <div>
                             <label class="block text-white/90 font-semibold mb-3 text-sm uppercase tracking-wide">Mutual Fund</label>
                             <select id="mutualFund" class="w-full p-4 rounded-2xl modern-input font-medium text-gray-800 cursor-pointer">
@@ -324,6 +298,7 @@
                             </select>
                         </div>
 
+                        <!-- Fund Info Card -->
                         <div id="fundInfo" class="glass-card-dark rounded-2xl p-4 hidden animate-scale-in">
                             <div class="flex items-center justify-between mb-3">
                                 <div>
@@ -337,6 +312,7 @@
                             </div>
                         </div>
 
+                        <!-- Amount Input -->
                         <div>
                             <label class="block text-white/90 font-semibold mb-3 text-sm uppercase tracking-wide">Monthly Investment</label>
                             <div class="relative">
@@ -347,6 +323,7 @@
                             </div>
                         </div>
 
+                        <!-- Return Rate -->
                         <div>
                             <label class="block text-white/90 font-semibold mb-3 text-sm uppercase tracking-wide">Expected Return</label>
                             <div class="relative">
@@ -357,11 +334,12 @@
                             </div>
                         </div>
 
+                        <!-- Investment Duration with Fixed Dark Slider -->
                         <div>
                             <label class="block text-white/90 font-semibold mb-3 text-sm uppercase tracking-wide">Investment Period</label>
                             <div class="flex items-center space-x-4">
                                 <input type="range" id="yearSlider" min="1" max="30" value="10" 
-                                       class="flex-1 h-3 bg-white/20 rounded-full appearance-none cursor-pointer">
+                                       class="flex-1 range-slider">
                                 <div class="flex items-center">
                                     <input type="number" id="investmentYears" value="10" min="1" max="30"
                                            class="w-16 p-2 rounded-lg modern-input text-center font-bold">
@@ -374,6 +352,7 @@
                             </div>
                         </div>
 
+                        <!-- Action Buttons -->
                         <div class="flex space-x-4 pt-6">
                             <button id="calculateBtn" class="flex-1 modern-button py-4 px-6 rounded-2xl font-bold text-white text-lg relative overflow-hidden">
                                 Calculate Returns
@@ -382,20 +361,14 @@
                                 Reset
                             </button>
                         </div>
-                        <div class="flex space-x-4 pt-4">
-                            <button id="saveCalculationBtn" class="flex-1 modern-button py-4 px-6 rounded-2xl font-bold text-white text-lg relative overflow-hidden">
-                                Save Calculation
-                            </button>
-                            <button id="loadCalculationsBtn" class="flex-1 modern-button py-4 px-6 rounded-2xl font-bold text-white text-lg relative overflow-hidden">
-                                Load Calculations
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Results Section -->
             <div class="lg:col-span-7 space-y-6">
                 <div id="results" class="hidden animate-fade-in">
+                    <!-- Metrics Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                         <div class="metric-card rounded-3xl p-6 text-center">
                             <div class="w-12 h-12 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center">
@@ -428,6 +401,7 @@
                         </div>
                     </div>
 
+                    <!-- Key Stats -->
                     <div class="glass-card rounded-3xl p-6 mb-6">
                         <h3 class="text-white font-bold text-lg mb-4 flex items-center">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -455,6 +429,7 @@
                         </div>
                     </div>
 
+                    <!-- Chart Section -->
                     <div class="glass-card rounded-3xl p-6">
                         <h3 class="text-white font-bold text-lg mb-4 flex items-center">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -462,12 +437,13 @@
                             </svg>
                             Growth Projection
                         </h3>
-                        <div class="chart-container">
-                            <canvas id="growthChart" height="300"></canvas>
+                        <div class="chart-container" style="height: 400px;">
+                            <canvas id="growthChart"></canvas>
                         </div>
                     </div>
                 </div>
 
+                <!-- Error Message -->
                 <div id="errorMessage" class="glass-card-dark rounded-2xl p-4 text-red-300 hidden animate-scale-in">
                     <div class="flex items-center">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -479,6 +455,7 @@
             </div>
         </div>
 
+        <!-- Investment Tips -->
         <div class="max-w-7xl mx-auto mt-16">
             <div class="glass-card rounded-3xl p-8">
                 <h2 class="text-3xl font-bold text-white text-center mb-8">💡 Smart Investment Tips</h2>
@@ -495,187 +472,153 @@
                     <div class="text-center group">
                         <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                             </svg>
                         </div>
                         <h3 class="text-white font-bold text-lg mb-2">Stay Consistent</h3>
-                        <p class="text-white/70 text-sm leading-relaxed">Regular investments through SIP help average out market volatility and build disciplined financial habits.</p>
+                        <p class="text-white/70 text-sm leading-relaxed">Consistency beats timing the market. Stick to your SIP plan through all market conditions for optimal results.</p>
                     </div>
                     <div class="text-center group">
                         <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.031 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                             </svg>
                         </div>
                         <h3 class="text-white font-bold text-lg mb-2">Diversify Smart</h3>
-                        <p class="text-white/70 text-sm leading-relaxed">Spread your investments across different fund categories to balance risk and optimize your portfolio returns.</p>
+                        <p class="text-white/70 text-sm leading-relaxed">Don't put all eggs in one basket. Spread your investments across different fund categories to reduce risk.</p>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Footer -->
+        <footer class="text-center mt-16 text-white/60">
+            <p class="text-sm">© 2024 SIP Calculator. Build your wealth systematically with smart investing.</p>
+        </footer>
     </div>
 
-    <div id="messageBox" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
-        <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full text-center">
-            <p id="messageBoxText" class="text-gray-800 text-lg mb-4"></p>
-            <button id="messageBoxCloseBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">OK</button>
-        </div>
-    </div>
-
-    <div id="loadCalculationsModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden modal">
-        <div class="glass-card rounded-3xl p-8 max-w-2xl w-full modal-content relative">
-            <h2 class="text-2xl font-bold text-white mb-6">Saved Calculations</h2>
-            <button id="closeLoadModalBtn" class="absolute top-4 right-4 text-white/70 hover:text-white text-3xl">&times;</button>
-            <div id="loadingSpinner" class="flex justify-center items-center py-8 hidden">
-                <div class="loader"></div>
-                <span class="text-white ml-3">Loading...</span>
-            </div>
-            <ul id="savedCalculationsList" class="max-h-96 overflow-y-auto space-y-3 pr-2">
-                <li class="text-white/70 text-center py-4">No saved calculations yet.</li>
-            </ul>
-        </div>
-    </div>
-
-    <script type="module">
-        // Import necessary Firebase functions
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Global variables for Firebase instances and Chart.js
-        let firebaseApp = null;
-        let db = null;
-        let auth = null;
-        let currentUserId = null;
+    <script>
         let growthChart = null;
-        let unsubscribeFromCalculations = null; // To manage Firestore real-time listener
-
-        // Ensure these global variables are defined by the environment
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        // Corrected: Use __firebase_config directly for initialization
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        // Corrected: Use __initial_auth_token directly for initialization
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
         // DOM Elements
-        const elements = {
-            mutualFund: document.getElementById('mutualFund'),
-            fundInfo: document.getElementById('fundInfo'),
-            fundName: document.getElementById('fundName'),
-            fundRisk: document.getElementById('fundRisk'),
-            expenseRatio: document.getElementById('expenseRatio'),
-            monthlyAmount: document.getElementById('monthlyAmount'),
-            annualReturn: document.getElementById('annualReturn'),
-            yearSlider: document.getElementById('yearSlider'),
-            investmentYears: document.getElementById('investmentYears'),
-            calculateBtn: document.getElementById('calculateBtn'),
-            resetBtn: document.getElementById('resetBtn'),
-            saveCalculationBtn: document.getElementById('saveCalculationBtn'),
-            loadCalculationsBtn: document.getElementById('loadCalculationsBtn'),
-            results: document.getElementById('results'),
-            errorMessage: document.getElementById('errorMessage'),
-            totalInvested: document.getElementById('totalInvested'),
-            totalReturns: document.getElementById('totalReturns'),
-            totalProfit: document.getElementById('totalProfit'),
-            monthlySip: document.getElementById('monthlySip'),
-            investPeriod: document.getElementById('investPeriod'),
-            returnRate: document.getElementById('returnRate'),
-            wealthMultiplier: document.getElementById('wealthMultiplier'),
-            messageBox: document.getElementById('messageBox'),
-            messageBoxText: document.getElementById('messageBoxText'),
-            messageBoxCloseBtn: document.getElementById('messageBoxCloseBtn'),
-            loadCalculationsModal: document.getElementById('loadCalculationsModal'),
-            closeLoadModalBtn: document.getElementById('closeLoadModalBtn'),
-            savedCalculationsList: document.getElementById('savedCalculationsList'),
-            loadingSpinner: document.getElementById('loadingSpinner'),
-            userIdDisplay: document.getElementById('userIdDisplay') // Added for user ID display
-        };
+        const mutualFund = document.getElementById('mutualFund');
+        const monthlyAmount = document.getElementById('monthlyAmount');
+        const annualReturn = document.getElementById('annualReturn');
+        const investmentYears = document.getElementById('investmentYears');
+        const yearSlider = document.getElementById('yearSlider');
+        const calculateBtn = document.getElementById('calculateBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const results = document.getElementById('results');
+        const errorMessage = document.getElementById('errorMessage');
+        const fundInfo = document.getElementById('fundInfo');
 
-        // Utility functions
-        const formatCurrency = (amount) => {
-            if (amount >= 10000000) {
-                return '₹' + (amount / 10000000).toFixed(2) + ' Cr';
-            } else if (amount >= 100000) {
-                return '₹' + (amount / 100000).toFixed(2) + ' L';
-            }
-            return '₹' + amount.toLocaleString('en-IN');
-        };
-
-        // Custom message box instead of alert()
-        const showMessageBox = (message, type = 'info') => {
-            elements.messageBoxText.textContent = message;
-            elements.messageBox.classList.remove('hidden');
-            // Optional: Add styling based on type (e.g., success, error)
-            if (type === 'error') {
-                elements.messageBoxText.classList.add('text-red-600');
+        // Update fund info when selection changes
+        mutualFund.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            
+            if (selectedOption.value === 'custom') {
+                fundInfo.classList.add('hidden');
+                annualReturn.disabled = false;
+                annualReturn.classList.remove('opacity-50');
             } else {
-                elements.messageBoxText.classList.remove('text-red-600');
-            }
-        };
-
-        const hideMessageBox = () => {
-            elements.messageBox.classList.add('hidden');
-        };
-
-        const showError = (message) => {
-            elements.errorMessage.querySelector('span').textContent = message;
-            elements.errorMessage.classList.remove('hidden');
-            elements.results.classList.add('hidden');
-        };
-
-        const hideError = () => {
-            elements.errorMessage.classList.add('hidden');
-        };
-
-        // SIP Calculation function
-        const calculateSIP = (monthlyAmount, annualRate, years) => {
-            const monthlyRate = annualRate / 12 / 100;
-            const totalMonths = years * 12;
-            
-            if (monthlyRate === 0) {
-                return monthlyAmount * totalMonths;
-            }
-            
-            const futureValue = monthlyAmount * (((Math.pow(1 + monthlyRate, totalMonths)) - 1) / monthlyRate) * (1 + monthlyRate);
-            return futureValue;
-        };
-
-        // Generate chart data
-        const generateChartData = (monthlyAmount, annualRate, years) => {
-            const labels = [];
-            const investedData = [];
-            const returnsData = [];
-            
-            for (let year = 1; year <= years; year++) {
-                labels.push(`Year ${year}`);
+                // Update return rate
+                annualReturn.value = selectedOption.value;
+                annualReturn.disabled = true;
+                annualReturn.classList.add('opacity-50');
                 
-                const totalInvested = monthlyAmount * 12 * year;
-                const futureValue = calculateSIP(monthlyAmount, annualRate, year);
+                // Show fund info
+                const fundName = selectedOption.dataset.fund;
+                const expenseRatio = selectedOption.dataset.expense;
+                const riskLevel = selectedOption.dataset.risk;
                 
-                investedData.push(totalInvested);
-                returnsData.push(futureValue);
+                document.getElementById('fundName').textContent = fundName;
+                document.getElementById('fundRisk').textContent = `${riskLevel} Risk`;
+                document.getElementById('expenseRatio').textContent = `${expenseRatio}%`;
+                
+                fundInfo.classList.remove('hidden');
             }
-            
-            return { labels, investedData, returnsData };
-        };
+        });
 
-        // Create/Update chart
-        const updateChart = (chartData) => {
+        // Sync slider and number input
+        yearSlider.addEventListener('input', function() {
+            investmentYears.value = this.value;
+        });
+
+        investmentYears.addEventListener('input', function() {
+            yearSlider.value = this.value;
+        });
+
+        // Format number with commas
+        function formatNumber(num) {
+            return new Intl.NumberFormat('en-IN').format(Math.round(num));
+        }
+
+        // Calculate SIP returns
+        function calculateSIP() {
+            const P = parseFloat(monthlyAmount.value) || 0;
+            const r = (parseFloat(annualReturn.value) || 0) / 100 / 12;
+            const n = parseInt(investmentYears.value) || 0;
+
+            if (P <= 0 || r < 0 || n <= 0) {
+                showError();
+                return;
+            }
+
+            hideError();
+
+            // SIP Formula: M = P × [{(1 + r)^n - 1} / r] × (1 + r)
+            const totalMonths = n * 12;
+            const maturityAmount = P * (((Math.pow(1 + r, totalMonths) - 1) / r) * (1 + r));
+            const totalInvestment = P * totalMonths;
+            const totalGains = maturityAmount - totalInvestment;
+            const wealthMultiplier = maturityAmount / totalInvestment;
+
+            // Update results
+            document.getElementById('totalInvested').textContent = `₹${formatNumber(totalInvestment)}`;
+            document.getElementById('totalReturns').textContent = `₹${formatNumber(maturityAmount)}`;
+            document.getElementById('totalProfit').textContent = `₹${formatNumber(totalGains)}`;
+            document.getElementById('monthlySip').textContent = `₹${formatNumber(P)}`;
+            document.getElementById('investPeriod').textContent = `${n} years`;
+            document.getElementById('returnRate').textContent = `${annualReturn.value}%`;
+            document.getElementById('wealthMultiplier').textContent = `${wealthMultiplier.toFixed(1)}x`;
+
+            // Generate chart data
+            generateChart(P, r, n);
+            
+            // Show results
+            results.classList.remove('hidden');
+        }
+
+        // Generate growth chart
+        function generateChart(monthlyInvestment, monthlyRate, years) {
             const ctx = document.getElementById('growthChart').getContext('2d');
             
             if (growthChart) {
                 growthChart.destroy();
             }
+
+            const labels = [];
+            const investedData = [];
+            const returnsData = [];
             
-            // Chart is available globally via window.Chart since it's loaded by a non-module script
-            growthChart = new window.Chart(ctx, { 
+            for (let year = 1; year <= years; year++) {
+                const months = year * 12;
+                const totalInvested = monthlyInvestment * months;
+                const maturityValue = monthlyInvestment * (((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate));
+                
+                labels.push(`Year ${year}`);
+                investedData.push(totalInvested);
+                returnsData.push(maturityValue);
+            }
+
+            growthChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: chartData.labels,
+                    labels: labels,
                     datasets: [
                         {
                             label: 'Amount Invested',
-                            data: chartData.investedData,
+                            data: investedData,
                             borderColor: '#10b981',
                             backgroundColor: 'rgba(16, 185, 129, 0.1)',
                             borderWidth: 3,
@@ -683,8 +626,8 @@
                             tension: 0.4
                         },
                         {
-                            label: 'Future Value',
-                            data: chartData.returnsData,
+                            label: 'Total Value',
+                            data: returnsData,
                             borderColor: '#3b82f6',
                             backgroundColor: 'rgba(59, 130, 246, 0.1)',
                             borderWidth: 3,
@@ -726,12 +669,7 @@
                                     size: 11
                                 },
                                 callback: function(value) {
-                                    if (value >= 10000000) {
-                                        return '₹' + (value / 10000000).toFixed(1) + 'Cr';
-                                    } else if (value >= 100000) {
-                                        return '₹' + (value / 100000).toFixed(1) + 'L';
-                                    }
-                                    return '₹' + (value / 1000).toFixed(0) + 'K';
+                                    return '₹' + formatNumber(value);
                                 }
                             },
                             grid: {
@@ -745,355 +683,58 @@
                     }
                 }
             });
-        };
-
-        // Function to perform calculation and update UI
-        const performCalculationAndUpdateUI = () => {
-            const monthlyAmount = parseFloat(elements.monthlyAmount.value);
-            const annualReturn = parseFloat(elements.annualReturn.value);
-            const years = parseInt(elements.investmentYears.value);
-
-            // Validation
-            if (!monthlyAmount || monthlyAmount <= 0) {
-                showError('Please enter a valid monthly investment amount.');
-                return;
-            }
-
-            if (isNaN(annualReturn) || annualReturn < 0) { // Check for NaN as well
-                showError('Please enter a valid expected return rate.');
-                return;
-            }
-
-            if (!years || years <= 0 || years > 30) {
-                showError('Please enter a valid investment period (1-30 years).');
-                return;
-            }
-
-            hideError();
-
-            // Calculations
-            const totalInvested = monthlyAmount * 12 * years;
-            const futureValue = calculateSIP(monthlyAmount, annualReturn, years);
-            const totalProfit = futureValue - totalInvested;
-            const wealthMultiplier = (totalInvested > 0) ? (futureValue / totalInvested).toFixed(1) : 0; // Avoid division by zero
-
-            // Update display
-            elements.totalInvested.textContent = formatCurrency(totalInvested);
-            elements.totalReturns.textContent = formatCurrency(futureValue);
-            elements.totalProfit.textContent = formatCurrency(totalProfit);
-            elements.monthlySip.textContent = formatCurrency(monthlyAmount);
-            elements.investPeriod.textContent = `${years} year${years > 1 ? 's' : ''}`;
-            elements.returnRate.textContent = `${annualReturn}%`;
-            elements.wealthMultiplier.textContent = `${wealthMultiplier}x`;
-
-            // Generate and update chart
-            const chartData = generateChartData(monthlyAmount, annualReturn, years);
-            updateChart(chartData);
-
-            // Show results
-            elements.results.classList.remove('hidden');
-        };
-
-        // Initialize Firebase and authenticate
-        async function initFirebase() {
-            try {
-                firebaseApp = initializeApp(firebaseConfig);
-                db = getFirestore(firebaseApp);
-                auth = getAuth(firebaseApp);
-
-                onAuthStateChanged(auth, async (user) => {
-                    if (user) {
-                        currentUserId = user.uid;
-                        elements.userIdDisplay.textContent = `User ID: ${currentUserId}`;
-                        console.log("Firebase authenticated. User ID:", currentUserId);
-                        // If modal is already open, load calculations
-                        if (elements.loadCalculationsModal.classList.contains('flex')) {
-                            await loadSavedCalculations();
-                        }
-                    } else {
-                        // Sign in anonymously if no custom token or user logs out
-                        if (initialAuthToken) {
-                            await signInWithCustomToken(auth, initialAuthToken);
-                        } else {
-                            await signInAnonymously(auth);
-                        }
-                        console.log("Firebase authentication initiated.");
-                    }
-                });
-            } catch (error) {
-                console.error("Error initializing Firebase:", error);
-                showMessageBox("Error initializing Firebase: " + error.message, 'error');
-            }
         }
 
-        // Function to save current calculation to Firestore
-        const saveCalculation = async () => {
-            if (!db || !currentUserId) {
-                showMessageBox("Firebase not initialized or user not authenticated. Please try again.", 'error');
-                return;
-            }
+        // Show error message
+        function showError() {
+            errorMessage.classList.remove('hidden');
+            results.classList.add('hidden');
+        }
 
-            const monthlyAmount = parseFloat(elements.monthlyAmount.value);
-            const annualReturn = parseFloat(elements.annualReturn.value);
-            const years = parseInt(elements.investmentYears.value);
+        // Hide error message
+        function hideError() {
+            errorMessage.classList.add('hidden');
+        }
 
-            if (!monthlyAmount || monthlyAmount <= 0 || isNaN(annualReturn) || annualReturn < 0 || !years || years <= 0 || years > 30) {
-                showMessageBox("Please ensure all calculation fields are valid before saving.", 'error');
-                return;
-            }
-
-            const calculationData = {
-                monthlyAmount,
-                annualReturn,
-                years,
-                timestamp: new Date().toISOString(),
-                userId: currentUserId // Store the user ID with the calculation
-            };
-
-            elements.saveCalculationBtn.disabled = true;
-            elements.saveCalculationBtn.textContent = 'Saving...';
-
-            try {
-                // Store in public collection
-                const docRef = await addDoc(collection(db, `artifacts/${appId}/public/data/sipCalculations`), calculationData);
-                showMessageBox("Calculation saved successfully! ID: " + docRef.id, 'success');
-                console.log("Document written with ID: ", docRef.id);
-            } catch (e) {
-                console.error("Error adding document: ", e);
-                showMessageBox("Error saving calculation: " + e.message, 'error');
-            } finally {
-                elements.saveCalculationBtn.disabled = false;
-                elements.saveCalculationBtn.textContent = 'Save Calculation';
-            }
-        };
-
-        // Function to load saved calculations from Firestore
-        const loadSavedCalculations = async () => {
-            if (!db || !currentUserId) {
-                elements.savedCalculationsList.innerHTML = '<li class="text-white/70 text-center py-4">Please wait for Firebase to initialize...</li>';
-                return;
-            }
-
-            elements.loadingSpinner.classList.remove('hidden');
-            elements.savedCalculationsList.innerHTML = ''; // Clear previous list
-
-            // Detach previous listener if exists
-            if (unsubscribeFromCalculations) {
-                unsubscribeFromCalculations();
-            }
-
-            try {
-                const calculationsCollectionRef = collection(db, `artifacts/${appId}/public/data/sipCalculations`);
-                
-                // Use onSnapshot for real-time updates
-                unsubscribeFromCalculations = onSnapshot(calculationsCollectionRef, (snapshot) => {
-                    elements.loadingSpinner.classList.add('hidden');
-                    if (snapshot.empty) {
-                        elements.savedCalculationsList.innerHTML = '<li class="text-white/70 text-center py-4">No saved calculations yet.</li>';
-                        return;
-                    }
-
-                    elements.savedCalculationsList.innerHTML = ''; // Clear list before populating
-                    snapshot.forEach((doc) => {
-                        const data = doc.data();
-                        const listItem = document.createElement('li');
-                        listItem.className = 'glass-card-dark rounded-xl p-4 mb-2 cursor-pointer hover:bg-white/20 transition-all duration-200 flex justify-between items-center';
-                        listItem.innerHTML = `
-                            <div>
-                                <div class="text-white font-semibold">
-                                    SIP: ₹${data.monthlyAmount.toLocaleString('en-IN')} | Return: ${data.annualReturn}% | Years: ${data.years}
-                                </div>
-                                <div class="text-white/60 text-xs mt-1">
-                                    Saved by: ${data.userId} on ${new Date(data.timestamp).toLocaleDateString()}
-                                </div>
-                            </div>
-                            <button class="delete-btn text-red-400 hover:text-red-600 ml-4 p-2 rounded-full hover:bg-white/10 transition-colors" data-id="${doc.id}">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm6 0a1 1 0 012 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd" />
-                                </svg>
-                            </button>
-                        `;
-                        listItem.dataset.id = doc.id; // Store doc ID for easy retrieval
-                        listItem.dataset.monthlyAmount = data.monthlyAmount;
-                        listItem.dataset.annualReturn = data.annualReturn;
-                        listItem.dataset.years = data.years;
-
-                        // Add click listener to load calculation
-                        listItem.addEventListener('click', (event) => {
-                            // Only load if not clicking the delete button
-                            if (!event.target.closest('.delete-btn')) {
-                                elements.monthlyAmount.value = listItem.dataset.monthlyAmount;
-                                elements.annualReturn.value = listItem.dataset.annualReturn;
-                                elements.investmentYears.value = listItem.dataset.years;
-                                elements.yearSlider.value = listItem.dataset.years; // Sync slider
-                                performCalculationAndUpdateUI();
-                                elements.loadCalculationsModal.classList.add('hidden');
-                                showMessageBox("Calculation loaded successfully!");
-                            }
-                        });
-
-                        // Add click listener for delete button
-                        listItem.querySelector('.delete-btn').addEventListener('click', async (event) => {
-                            event.stopPropagation(); // Prevent listItem click event from firing
-                            const confirmDelete = await showConfirmBox("Are you sure you want to delete this calculation?");
-                            if (confirmDelete) {
-                                await deleteCalculation(doc.id);
-                            }
-                        });
-                        elements.savedCalculationsList.appendChild(listItem);
-                    });
-                });
-            } catch (e) {
-                console.error("Error loading documents: ", e);
-                showMessageBox("Error loading calculations: " + e.message, 'error');
-                elements.loadingSpinner.classList.add('hidden');
-                elements.savedCalculationsList.innerHTML = '<li class="text-white/70 text-center py-4">Failed to load calculations.</li>';
-            }
-        };
-
-        // Function to delete a calculation from Firestore
-        const deleteCalculation = async (docId) => {
-            if (!db || !currentUserId) {
-                showMessageBox("Firebase not initialized or user not authenticated.", 'error');
-                return;
-            }
-            try {
-                // Ensure only the user who created it can delete it (based on security rules)
-                // This client-side check is for UX, server-side rules are the ultimate guard.
-                const docRef = doc(db, `artifacts/${appId}/public/data/sipCalculations`, docId);
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists() && docSnap.data().userId === currentUserId) {
-                    await deleteDoc(docRef);
-                    showMessageBox("Calculation deleted successfully!");
-                } else {
-                    showMessageBox("You can only delete your own calculations.", 'error');
-                }
-            } catch (e) {
-                console.error("Error deleting document: ", e);
-                showMessageBox("Error deleting calculation: " + e.message, 'error');
-            }
-        };
-
-        // Custom confirm box
-        const showConfirmBox = (message) => {
-            return new Promise((resolve) => {
-                const confirmModal = document.createElement('div');
-                confirmModal.className = 'fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50';
-                confirmModal.innerHTML = `
-                    <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full text-center">
-                        <p class="text-gray-800 text-lg mb-4">${message}</p>
-                        <div class="flex justify-center space-x-4">
-                            <button id="confirmYesBtn" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Yes</button>
-                            <button id="confirmNoBtn" class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">No</button>
-                        </div>
-                    </div>
-                `;
-                document.body.appendChild(confirmModal);
-
-                const confirmYesBtn = document.getElementById('confirmYesBtn');
-                const confirmNoBtn = document.getElementById('confirmNoBtn');
-
-                confirmYesBtn.onclick = () => {
-                    document.body.removeChild(confirmModal);
-                    resolve(true);
-                };
-                confirmNoBtn.onclick = () => {
-                    document.body.removeChild(confirmModal);
-                    resolve(false);
-                };
-            });
-        };
-
-
-        // Event Listeners
-        elements.mutualFund.addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
-            const fundName = selectedOption.getAttribute('data-fund');
-            const expenseRatio = selectedOption.getAttribute('data-expense');
-            const riskLevel = selectedOption.getAttribute('data-risk');
-            
-            if (this.value !== 'custom' && fundName) {
-                elements.annualReturn.value = this.value;
-                elements.fundName.textContent = fundName;
-                elements.fundRisk.textContent = `${riskLevel} Risk`;
-                elements.expenseRatio.textContent = `${expenseRatio}%`;
-                elements.fundInfo.classList.remove('hidden');
-            } else {
-                elements.fundInfo.classList.add('hidden');
-            }
-        });
-
-        elements.yearSlider.addEventListener('input', function() {
-            elements.investmentYears.value = this.value;
-        });
-
-        elements.investmentYears.addEventListener('input', function() {
-            if (this.value >= 1 && this.value <= 30) {
-                elements.yearSlider.value = this.value;
-            }
-        });
-
-        elements.calculateBtn.addEventListener('click', performCalculationAndUpdateUI);
-
-        elements.resetBtn.addEventListener('click', function() {
-            // Reset form
-            elements.mutualFund.value = 'custom';
-            elements.monthlyAmount.value = '5000';
-            elements.annualReturn.value = '12';
-            elements.yearSlider.value = '10';
-            elements.investmentYears.value = '10';
+        // Reset form
+        function resetForm() {
+            monthlyAmount.value = '5000';
+            annualReturn.value = '12';
+            investmentYears.value = '10';
+            yearSlider.value = '10';
+            mutualFund.value = 'custom';
             
             // Hide results and fund info
-            elements.results.classList.add('hidden');
-            elements.fundInfo.classList.add('hidden');
-            hideError();
+            results.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+            fundInfo.classList.add('hidden');
+            
+            // Enable return rate input
+            annualReturn.disabled = false;
+            annualReturn.classList.remove('opacity-50');
             
             // Destroy chart
             if (growthChart) {
                 growthChart.destroy();
                 growthChart = null;
             }
-            // Re-run initial calculation after reset
-            performCalculationAndUpdateUI();
-        });
+        }
 
-        elements.saveCalculationBtn.addEventListener('click', saveCalculation);
-
-        elements.loadCalculationsBtn.addEventListener('click', () => {
-            elements.loadCalculationsModal.classList.remove('hidden');
-            elements.loadCalculationsModal.classList.add('flex'); // Ensure it's flex for centering
-            loadSavedCalculations(); // Load data when modal opens
-        });
-
-        elements.closeLoadModalBtn.addEventListener('click', () => {
-            elements.loadCalculationsModal.classList.add('hidden');
-            elements.loadCalculationsModal.classList.remove('flex');
-            if (unsubscribeFromCalculations) {
-                unsubscribeFromCalculations(); // Detach listener when modal closes
-            }
-        });
-
-        elements.messageBoxCloseBtn.addEventListener('click', hideMessageBox);
-
+        // Event listeners
+        calculateBtn.addEventListener('click', calculateSIP);
+        resetBtn.addEventListener('click', resetForm);
 
         // Auto-calculate on input change
-        [elements.monthlyAmount, elements.annualReturn, elements.investmentYears].forEach(element => {
-            element.addEventListener('input', function() {
-                // Only trigger calculation if all fields have values that could be valid numbers
-                if (elements.monthlyAmount.value !== '' && elements.annualReturn.value !== '' && elements.investmentYears.value !== '') {
-                    performCalculationAndUpdateUI();
+        [monthlyAmount, annualReturn, investmentYears].forEach(input => {
+            input.addEventListener('input', function() {
+                if (monthlyAmount.value && annualReturn.value && investmentYears.value) {
+                    calculateSIP();
                 }
             });
         });
 
-        // Initialize Firebase and perform default calculation on window load
-        window.addEventListener('load', async function() {
-            await initFirebase(); // Initialize Firebase first
-            // Give Firebase a moment to authenticate and set currentUserId
-            setTimeout(() => {
-                performCalculationAndUpdateUI();
-            }, 1000); 
-        });
+        // Initial calculation
+        calculateSIP();
     </script>
 </body>
 </html>
