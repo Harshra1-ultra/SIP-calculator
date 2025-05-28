@@ -394,18 +394,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- <div class="glass-card rounded-3xl p-6">
-                        <h3 class="text-white font-bold text-lg mb-4 flex items-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                            </svg>
-                            Growth Projection
-                        </h3>
-                        <div class="chart-container">
-                            <canvas id="growthChart" height="300"></canvas>
-                        </div>
-                    </div> -->
                 </div>
 
                 <div id="errorMessage" class="glass-card-dark rounded-2xl p-4 text-red-300 hidden animate-scale-in">
@@ -500,47 +488,44 @@
             elements.errorMessage.classList.add('hidden');
         };
 
-        // SIP Calculation function with annual step-up
+        /**
+         * Calculates the future value and total invested amount for a SIP with an optional annual step-up.
+         * @param {number} monthlyAmount The initial monthly investment amount.
+         * @param {number} annualRate The expected annual return rate (as a percentage).
+         * @param {number} years The total investment period in years.
+         * @param {number} annualIncreaseRate The annual percentage increase in SIP amount.
+         * @returns {{futureValue: number, totalInvested: number}} An object containing the calculated future value and total invested amount.
+         */
         const calculateSIP = (monthlyAmount, annualRate, years, annualIncreaseRate) => {
-            let accumulatedValue = 0;
-            let accumulatedInvested = 0;
-            let currentMonthlySIPForYear = monthlyAmount; // Temporary variable for current year's SIP
+            let accumulatedValue = 0; // Represents the total accumulated value at the end of each year
+            let accumulatedInvested = 0; // Represents the total amount invested over the years
+            let currentMonthlySIPForYear = monthlyAmount; // The monthly SIP amount for the current year
 
-            const monthlyRate = annualRate / 12 / 100;
-            const annualReturnFactor = 1 + (annualRate / 100);
-            const annualIncreaseFactor = 1 + (annualIncreaseRate / 100);
+            const monthlyRate = annualRate / 12 / 100; // Monthly interest rate
+            const annualReturnFactor = 1 + (annualRate / 100); // Factor to compound previous year's value annually
+            const annualIncreaseFactor = 1 + (annualIncreaseRate / 100); // Factor to increase SIP annually
 
             for (let year = 1; year <= years; year++) {
-                // Calculate future value of current year's monthly contributions
-                // Formula for Future Value of an Ordinary Annuity (monthly payments)
+                // Calculate the Future Value of the current year's 12 monthly contributions.
+                // This uses the Future Value of an Annuity Due formula, which assumes payments
+                // are made at the beginning of each period (common for SIPs).
+                // FV_annuity = P * [((1 + r)^n - 1) / r] * (1 + r)
+                // Where P = currentMonthlySIPForYear, r = monthlyRate, n = 12 (months in a year)
                 const currentYearSIPValue = currentMonthlySIPForYear * (((Math.pow(1 + monthlyRate, 12)) - 1) / monthlyRate) * (1 + monthlyRate);
                 
-                // Add current year's SIP value to accumulated value and compound for the year
+                // The accumulated value from previous years needs to be compounded for the current year.
+                // Then, the future value of the current year's SIPs is added to it.
                 accumulatedValue = (accumulatedValue * annualReturnFactor) + currentYearSIPValue;
-                accumulatedInvested += (currentMonthlySIPForYear * 12); // Track total invested
                 
-                // Apply step-up for the next year's SIP, if it's not the last year
+                // Add the actual amount invested for the current year to the total invested sum.
+                accumulatedInvested += (currentMonthlySIPForYear * 12); 
+                
+                // If it's not the last year, apply the annual increase to the monthly SIP for the next year.
                 if (year < years) {
                     currentMonthlySIPForYear *= annualIncreaseFactor;
                 }
             }
             return { futureValue: accumulatedValue, totalInvested: accumulatedInvested };
-        };
-
-        // Generate chart data (function is now empty as chart is removed)
-        const generateChartData = (monthlyAmount, annualRate, years, annualIncreaseRate) => {
-            // This function is no longer needed but kept as a placeholder if chart functionality is re-added
-            // It will return empty data as there's no chart to populate.
-            return { labels: [], investedData: [], returnsData: [] };
-        };
-
-        // Create/Update chart (function is now empty as chart is removed)
-        const updateChart = (chartData) => {
-            // No chart to update
-            if (growthChart) {
-                growthChart.destroy();
-                growthChart = null;
-            }
         };
 
         // Function to perform calculation and update UI
@@ -576,9 +561,10 @@
             // Calculations using the updated calculateSIP function
             const { futureValue, totalInvested } = calculateSIP(monthlyAmount, annualReturn, years, annualIncrease);
             const totalProfit = futureValue - totalInvested;
+            // Ensure wealth multiplier is not calculated with division by zero
             const wealthMultiplier = (totalInvested > 0) ? (futureValue / totalInvested).toFixed(1) : 0;
 
-            // Update display
+            // Update display elements with formatted currency and values
             elements.totalInvested.textContent = formatCurrency(totalInvested);
             elements.totalReturns.textContent = formatCurrency(futureValue);
             elements.totalProfit.textContent = formatCurrency(totalProfit);
@@ -588,50 +574,43 @@
             elements.wealthMultiplier.textContent = `${wealthMultiplier}x`;
             elements.annualIncreaseDisplay.textContent = `${annualIncrease}%`; // Display annual increase
 
-            // No chart to generate or update
-            // const chartData = generateChartData(monthlyAmount, annualReturn, years, annualIncrease);
-            // updateChart(chartData);
-
-            // Show results
+            // Show results section
             elements.results.classList.remove('hidden');
         };
 
         // Event Listeners
         elements.yearSlider.addEventListener('input', function() {
             elements.investmentYears.value = this.value;
+            performCalculationAndUpdateUI(); // Recalculate on slider change
         });
 
         elements.investmentYears.addEventListener('input', function() {
             if (this.value >= 1 && this.value <= 30) {
                 elements.yearSlider.value = this.value;
             }
+            performCalculationAndUpdateUI(); // Recalculate on manual year input change
         });
 
         elements.calculateBtn.addEventListener('click', performCalculationAndUpdateUI);
 
         elements.resetBtn.addEventListener('click', function() {
-            // Reset form
+            // Reset form fields to default values
             elements.monthlyAmount.value = '5000';
             elements.annualReturn.value = '12';
             elements.yearSlider.value = '10';
             elements.investmentYears.value = '10';
             elements.annualIncrease.value = '0'; // Reset annual increase
             
-            // Hide results
+            // Hide results and error messages
             elements.results.classList.add('hidden');
             hideError();
             
-            // No chart to destroy
-            // if (growthChart) {
-            //     growthChart.destroy();
-            //     growthChart = null;
-            // }
-            // Re-run initial calculation after reset
+            // Re-run initial calculation after reset to show default results
             performCalculationAndUpdateUI();
         });
 
-        // Auto-calculate on input change
-        [elements.monthlyAmount, elements.annualReturn, elements.investmentYears, elements.annualIncrease].forEach(element => {
+        // Auto-calculate on input change for key fields
+        [elements.monthlyAmount, elements.annualReturn, elements.annualIncrease].forEach(element => {
             element.addEventListener('input', function() {
                 // Only trigger calculation if all fields have values that could be valid numbers
                 if (elements.monthlyAmount.value !== '' && elements.annualReturn.value !== '' && 
